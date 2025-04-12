@@ -18,7 +18,7 @@ export default function Products() {
         </span>
         <br />
         <span className="text-2xl font-bold text-center text-white">
-          This is a simple Next.js app with Tailwind CSS and TypeScript.
+          Teste teste teste teste
         </span>
               <Button color="bg-gray-500" text="Cadastrar" onClick={handleClick}/>
       </h1>
