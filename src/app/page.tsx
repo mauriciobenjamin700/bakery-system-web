@@ -7,7 +7,7 @@ export default function Home() {
         </span>
         <br />
         <span className="text-2xl font-bold text-center text-white">
-          This is a simple Next.js app with Tailwind CSS and TypeScript.
+          mamrabfsavbfsajfasjfsan.
         </span>
       </h1>
     </div>

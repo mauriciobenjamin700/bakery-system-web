@@ -1,0 +1,183 @@
+.home-page {
+  background-color: #fdf0dc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  height: 100vh; /* Usa toda a altura da tela */
+  background-color: #fdf0dc;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-banner {
+  width: 100%;
+  height: 45vh; /* 45% da altura da tela */
+  position: relative;
+  text-align: center;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%; /* Ocupa os 45vh definidos acima */
+  background-image: url("../../assets/images/fundo.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.home-content {
+  height: 55vh; /* 55% restantes */
+  background-color: #FFE3A6;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  overflow-y: auto; /* Habilita scroll se o conteúdo for maior */
+}
+
+.home-content h2 {
+  color: #5c2e00;
+  margin-bottom: 50px;
+  font-size: 4rem;
+}
+
+.linha {
+  border: none;
+  height: 5px;
+  background-color: #5c2e00;
+  width: 100%;
+}
+
+.grid-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 40px;
+  width: 60%;
+  max-width: 100%;
+}
+
+.card {
+  background-color: #8E3400;
+  border: 3px solid #000000;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card:hover {
+  background-color: #572000;
+  transform: translateY(-5px);
+}
+
+.card .icon {
+  height: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Aplicar ícones diferentes via nth-child para cada card */
+.card:nth-child(1) .icon {
+  background-image: url('https://img.icons8.com/ios/100/ffffff/sales-performance.png');
+}
+
+.card:nth-child(2) .icon {
+  background-image: url('https://img.icons8.com/ios/100/ffffff/fast-moving-consumer-goods.png');
+}
+
+.card:nth-child(3) .icon {
+  background-image: url('https://img.icons8.com/ios/100/ffffff/ingredients.png');
+}
+
+.card:nth-child(4) .icon {
+  background-image: url('https://img.icons8.com/ios/100/ffffff/graph-report.png');
+}
+
+.card strong {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.card .arrow {
+  font-size: 1.4rem;
+  color: white;
+  text-align: right;
+}
+
+/* Responsivo */
+@media (max-width: 1024px) {
+  .home-content {
+    padding: 20px;
+  }
+
+  .home-content h2 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+  }
+
+  .grid-options {
+    width: 80%;
+    gap: 30px;
+  }
+
+  .card {
+    padding: 15px;
+    gap: 8px;
+  }
+
+  .card strong {
+    font-size: 1.3rem;
+  }
+
+  .card .arrow {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+  }
+
+  .grid-options {
+    grid-template-columns: repeat(2, 1fr);
+    width: 90%;
+    gap: 20px;
+  }
+
+  .card {
+    padding: 12px;
+    gap: 6px;
+  }
+
+  .card .icon {
+    height: 60px;
+  }
+
+  .card strong {
+    font-size: 1.1rem;
+  }
+
+  .card .arrow {
+    font-size: 1rem;
+  }
+
+  .linha {
+    height: 3px;
+  }
+
+  .banner-image {
+    height: 150px;
+  }
+}
