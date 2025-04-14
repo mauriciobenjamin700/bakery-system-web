@@ -1,0 +1,31 @@
+.header {
+  background-color: #6d2e00;
+  padding: 1rem 2rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  gap: 20px;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav a {
+  margin: 0 2rem;
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+}
+
+.nav .active {
+  text-decoration: underline;
+}
