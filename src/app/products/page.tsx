@@ -99,10 +99,9 @@ export default function Produtos() {
           </div>
         </div>
 
-
         <div className={styles.grid}>
           {produtosFiltrados.map((produto) => (
-            <div className={styles.card} key={produto.id}>
+            <div className={styles.card} key={produto.id} onClick={() => setDetalhesProduto(produto)}>
               <img src={produto.imagem} alt={produto.nome} className={styles.image} />
               <div className={styles.cardContent}>
                 <h3>{produto.nome}</h3>
@@ -110,10 +109,7 @@ export default function Produtos() {
                 <p>Preço: R$ {produto.preco.toFixed(2)}</p>
               </div>
               <div className={styles.cardFooter}>
-                <button
-                  className={styles.acessar}
-                  onClick={() => setDetalhesProduto(produto)}
-                >
+                <button className={styles.acessar}>
                   Acessar
                 </button>
               </div>

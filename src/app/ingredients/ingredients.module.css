@@ -1,4 +1,4 @@
-/* app/produtos/Produtos.module.css */
+/* Atualizando as cores e o estilo conforme o novo design */
 
 .container {
   background: #f8f8f8;
@@ -22,7 +22,7 @@
 .title {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #6d2e00;
+  color: #6d2e00; /* Nova cor */
 }
 
 .searchContainer {
@@ -58,7 +58,7 @@
 }
 
 .buttonIcon {
-  background-color: #6d2e00;
+  background-color: #6d2e00; /* Nova cor */
   color: white;
   padding: 0.75rem 1.2rem;
   border: none;
@@ -90,13 +90,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  cursor: pointer;
-  transition: box-shadow 0.2s ease;
   height: 100%;
-}
-
-.card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .image {
@@ -113,7 +107,7 @@
 
 .cardContent h3 {
   margin-bottom: 0.3rem;
-  font-size: 1.6rem;
+  font-size: 2rem;
   color: #571f00;
 }
 
@@ -146,4 +140,60 @@
   background-color: #6d2e00;
   color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.acessar .icon {
+  display: inline-block;
+  vertical-align: middle;
+  transition: filter 0.2s;
+}
+
+.acessar:hover .icon {
+  filter: brightness(0) invert(1); /* Deixa o ícone branco ao hover */
+}
+
+.remover {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.remover:hover {
+  transform: scale(1.1);
+}
+
+.imageWrapper {
+  position: relative;
+}
+
+.iconOverlay {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: none;
+  border-radius: 50%;
+  padding: 0.3rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);  /* Sombra mais pronunciada */
+  background: rgba(227, 227, 227, 0.8);  /* Cor de fundo com transparência */
+}
+
+.iconOverlay:hover {
+  img {
+    filter: brightness(0) invert(1); /* Deixa o ícone branco ao hover */
+  }
+  transform: scale(1.2);
+  background: #000000;  /* Cor de fundo mais clara e suave com transparência */
+}
+
+.remover img {
+  width: 20px;
+  height: 20px;
 }
