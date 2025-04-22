@@ -12,16 +12,16 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.logo}>LOGO</div>
       <nav className={styles.nav}>
-        <Link href="/products" className={pathname === '/produtos' ? styles.active : ''}>
+        <Link href="/products" className={pathname === '/products' ? styles.active : ''}>
           Produtos
         </Link>
         <Link href="/vendas" className={pathname === '/vendas' ? styles.active : ''}>
           Vendas
         </Link>
-        <Link href="/ingredients" className={pathname === '/ingredientes' ? styles.active : ''}>
+        <Link href="/ingredients" className={pathname === '/ingredients' ? styles.active : ''}>
           Ingredientes
         </Link>
-        <Link href="/relatorio" className={pathname === '/relatorio' ? styles.active : ''}>
+        <Link href="/relatorios" className={pathname === '/relatorios' ? styles.active : ''}>
           Relatório
         </Link>
       </nav>
