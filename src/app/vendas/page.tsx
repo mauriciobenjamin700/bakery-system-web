@@ -4,6 +4,7 @@ import Header from '../../components/cabecalho/Header';
 import style from './page.module.css';
 import { useState } from 'react';
 import Image from 'next/image';
+import React from 'react';
 
 interface ItemVenda {
     id: number;

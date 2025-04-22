@@ -2,20 +2,10 @@
   width: 70%;
   /* largura da pagina*/
   height: 70%;
-  /* altura da pagina*/
-  /* margin-top: 100px; */
-  /* espaço acima*/
-  /* cor de fundo*/
   min-height: 100vh;
-  /* altura minima*/
-  display: flex;
-  /* flexbox para centralizar o conteúdo */
-  flex-direction: column;
-  /* direção da coluna */
-  /* align-items: center; */
-  /* centraliza horizontalmente */
-  /* margin-top: 10px; */
 
+  display: flex;
+  flex-direction: column;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -23,7 +13,7 @@
 
 .conteiner {
   flex: 1;
-  padding-top: 77px; 
+  padding-top: 77px;
   /* Altura do Header */
   padding: 20px;
 }
@@ -37,7 +27,7 @@
   /* espaço abaixo do título */
   text-align: left;
   /* centraliza o texto */
-  margin-top:20px;
+  margin-top: 20px;
   /* espaço acima do título */
   font-size: 25px;
 
@@ -80,18 +70,18 @@
   width: 9px;
   height: 80px;
   /* padding: 5px; */
- 
-  
+
+
   /* preenchimento interno */
   /* border-bottom: 1px solid #8E3400; */
-  box-shadow:0 1px 0px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1);
   /* borda inferior */
   text-align: left;
   /* alinha texto à esquerda */
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.tabelaVendas tr > th {
+.tabelaVendas tr>th {
   width: 30px;
   height: 20px;
   padding: 10px;
@@ -100,12 +90,13 @@
   /* negrito */
   color: black;
   /* cor do texto */
-  box-shadow:0 2px 1px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
 }
 
 .tabelaVendas th:last-child,
 .tabelaVendas td:last-child {
-  text-align: right; /* Alinha a última coluna (ações) à direita */
+  text-align: right;
+  /* Alinha a última coluna (ações) à direita */
 }
 
 .tabelaVendas tbody tr:last-child td {
@@ -115,22 +106,23 @@
 
 /* Aqui tentando fazer o cabeçalho e rodapé fixos */
 
-.tabelaVendas thead > tr > th {
+.tabelaVendas thead>tr>th {
   position: sticky;
   top: 0;
   /* fixa o cabeçalho no topo */
   background-color: #dddfeb;
-  box-shadow:0 2px 1px rgba(0, 0, 0, 0.1); ;
-  
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+  ;
+
 }
 
 .totalFixed {
   position: sticky;
   bottom: 0;
-  /* fixa o elemento na parte inferior */  
+  /* fixa o elemento na parte inferior */
   justify-content: space-between;
   align-items: center;
-  width:100%;
+  width: 100%;
   display: flex;
   box-sizing: border-box;
   padding: 10px 40px;
@@ -205,7 +197,7 @@
   /* largura total */
   padding: 10px;
   /* preenchimento interno */
-  
+
   /* borda */
   border-radius: 8px;
   /* bordas arredondadas */
@@ -213,7 +205,8 @@
   /* tamanho da fonte */
   color: #333;
   /* cor do texto */
-  box-shadow:0 2px 1px rgba(0, 0, 0, 0.1); ;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+  ;
 }
 
 .input,
@@ -228,7 +221,8 @@
   /* bordas arredondadas */
   font-size: 1rem;
   /* tamanho da fonte */
-  box-shadow:0 2px 1px rgba(0, 0, 0, 0.1); ;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+  ;
 }
 
 .confirmarAdicionar {
@@ -256,7 +250,7 @@
 }
 
 .acoesVenda {
-  
+
   margin-top: 225px;
   /* espaço acima */
   display: flex;
@@ -299,5 +293,3 @@
 .confirmarVenda:hover {
   background-color: #093a0d;
 }
-
-

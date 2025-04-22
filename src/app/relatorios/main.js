@@ -113,7 +113,10 @@ export function initBarChart(canvasElement) {
 // Se existir, cria um novo gráfico de linha
 // e destrói a instância anterior, se houver.
 
-
+// Cria uma nova instância do gráfico
+// Verifica se o elemento canvas existe
+// Se existir, cria um novo gráfico de linha
+// e destrói a instância anterior, se houver.
 let lineChartInstance;
 export function initLineChart(canvasElement) {
     if (canvasElement) {
