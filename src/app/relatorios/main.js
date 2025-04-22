@@ -194,6 +194,8 @@ export function initLineChart(canvasElement) {
 
 export const populateUl = (ulElement, chartData) => {
     if (ulElement) {
+        // Limpa o conteúdo atual da lista
+        ulElement.innerHTML = '';
         chartData.labels.forEach((label, index) => {
             let li = document.createElement('li');
             li.innerHTML = `${label}: <span class="${style.percentage}">${chartData.data[index]}%</span>`;

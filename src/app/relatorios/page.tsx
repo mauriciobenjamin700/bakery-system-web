@@ -23,7 +23,7 @@ export default function Relatorios() {
     const handleOptionClick = (option:MenuOption) => {
         setSelectedOption(option);
         setIsMenuOpen(false);
-        // Aqui você pode adicionar a lógica para filtrar os relatórios com base na opção selecionada
+        // Aqui  adiciona a lógica para filtrar os relatórios com base na opção selecionada
     };
 
 
