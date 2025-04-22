@@ -1,5 +1,6 @@
 import "./globals.css";
 
+
 export const metadata = {
   title: "Login - Jasson Chef",
   description: "Tela de login da padaria",

@@ -1,7 +1,8 @@
 'use client'
 
-import styles from "./styles.module.css";
-import { useRouter } from 'next/navigation'
+import styles from './page.module.css';
+import { useRouter } from 'next/router';
+import React from 'react';
 
 export default function HomePage() {
   const router = useRouter()
