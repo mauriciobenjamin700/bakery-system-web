@@ -11,33 +11,29 @@ export async function requestGet(
     url: string,
     token?: string
 ): Promise<any> {
-    try{ 
-        const headers: HeadersInit = {
-            'Content-Type': 'application/json',
-        };
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+    };
 
-        if (token) {
-            headers['Authorization'] = `Bearer ${token}`;
-        }
-
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: headers,
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        return response.json();
-
-    } catch (error) {
-        console.error('Error in requestGet:', error);
-        throw new RequestError(
-            error instanceof Response ? error.status : 500,
-            error instanceof Error && (error as any).data?.detail ? (error as any).data.detail : 'Erro no servidor'
-        )
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
     }
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: headers,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new RequestError(
+            response.status,
+            data.detail || 'Erro no servidor'
+        );
+    }
+
+    return data;
 }
 
 export async function requestPost(
@@ -45,67 +41,63 @@ export async function requestPost(
     body: any,
     token?: string
 ): Promise<any> {
-    try {
-        const headers: HeadersInit = {
-            'Content-Type': 'application/json',
-        };
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+    };
 
-        if (token) {
-            headers['Authorization'] = `Bearer ${token}`;
-        }
-
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(body),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        return response.json();
-
-    } catch (error) {
-        console.error('Error in requestPost:', error);
-        throw new RequestError(
-            error instanceof Response ? error.status : 500,
-            error instanceof Error && (error as any).data?.detail ? (error as any).data.detail : 'Erro no servidor'
-        )
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
     }
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+
+    console.log("Response DATA: ", data);
+
+    if (!response.ok) {
+        console.log("ERROR: ", response);
+        throw new RequestError(
+            response.status,
+            data.detail || 'Erro no servidor'
+        );
+    }
+
+    return data;
 }
 
 export async function requestDelete(
     url: string,
     token?: string
 ): Promise<any> {
-    try {
-        const headers: HeadersInit = {
-            'Content-Type': 'application/json',
-        };
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+    };
 
-        if (token) {
-            headers['Authorization'] = `Bearer ${token}`;
-        }
-
-        const response = await fetch(url, {
-            method: 'DELETE',
-            headers: headers,
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        return response.json();
-
-    } catch (error) {
-        console.error('Error in requestDelete:', error);
-        throw new RequestError(
-            error instanceof Response ? error.status : 500,
-            error instanceof Error && (error as any).data?.detail ? (error as any).data.detail : 'Erro no servidor'
-        )
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
     }
+
+    const response = await fetch(url, {
+        method: 'DELETE',
+        headers: headers,
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        
+        throw new RequestError(
+            response.status,
+            data.detail || 'Erro no servidor'
+        );
+    }
+
+    return data;
 }
 
 export async function requestPut(
@@ -113,32 +105,29 @@ export async function requestPut(
     body: any,
     token?: string
 ): Promise<any> {
-    try {
-        const headers: HeadersInit = {
-            'Content-Type': 'application/json',
-        };
+    const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+    };
 
-        if (token) {
-            headers['Authorization'] = `Bearer ${token}`;
-        }
-
-        const response = await fetch(url, {
-            method: 'PUT',
-            headers: headers,
-            body: JSON.stringify(body),
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        return response.json();
-
-    } catch (error) {
-        console.error('Error in requestPut:', error);
-        throw new RequestError(
-            error instanceof Response ? error.status : 500,
-            error instanceof Error && (error as any).data?.detail ? (error as any).data.detail : 'Erro no servidor'
-        )
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
     }
+
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: headers,
+        body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+            throw new RequestError(
+                response.status,
+                data.detail || 'Erro no servidor'
+            );
+        }
+
+    return data;
+
 }

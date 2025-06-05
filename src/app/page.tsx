@@ -8,6 +8,7 @@ import { FaUser } from 'react-icons/fa';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import UserService from '@/services/user';
 import { useSetUser } from '@/hooks/user';
+import RequestError from '@/types/error';
 
 
 export default function LoginPage() {
@@ -23,17 +24,25 @@ export default function LoginPage() {
   };
 
   const handleLogin = async () => {
-    const service = new UserService()
-    const request: UserLogin = {
-      email: username,
-      password: password,
-    }
-    const response = await service.login(request)
-    if (response.user) {
-        setUser(response.user)
-        router.push('/products');
-    } else {
-      setError('Usuário ou senha inválidos!');
+    try {
+
+    
+      const service = new UserService()
+      const request: UserLogin = {
+        email: username,
+        password: password,
+      }
+      const response = await service.login(request)
+      if (response.user) {
+          setUser(response.user)
+          router.push('/products');
+      } else {
+        setError('Usuário ou senha inválidos!');
+      }
+    } catch (err: unknown) {
+      const requestError = err as RequestError;
+      console.error('Erro ao fazer login:', requestError);
+      setError(requestError.detail || 'Usuário ou senha inválidos!');
     }
   };
 
