@@ -6,11 +6,9 @@ import { useRouter } from 'next/navigation';
 import styles from './login.module.css';
 import { FaUser } from 'react-icons/fa';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
+import UserService from '@/services/user';
+import { useSetUser } from '@/hooks/user';
 
-const users = [
-  { username: 'admin', password: 'admin123', role: 'admin' },
-  { username: 'funcionario', password: 'func123', role: 'funcionario' }
-];
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -18,20 +16,22 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
+  const setUser = useSetUser();
 
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleLogin = () => {
-    const user = users.find(u => u.username === username && u.password === password);
-    if (user) {
-      // Redireciona para a página apropriada com base no tipo de usuário
-      if (user.role === 'admin') {
-        router.push('/products'); // Página de relatórios do administrador
-      } else {
-        router.push('/products'); // Página do funcionário
-      }
+  const handleLogin = async () => {
+    const service = new UserService()
+    const request: UserLogin = {
+      email: username,
+      password: password,
+    }
+    const response = await service.login(request)
+    if (response.user) {
+        setUser(response.user)
+        router.push('/products');
     } else {
       setError('Usuário ou senha inválidos!');
     }
@@ -46,12 +46,12 @@ export default function LoginPage() {
         {error && <p className={styles.error}>{error}</p>}
 
         <div className={styles.inputGroup}>
-          <label htmlFor="usuario">Usuário</label>
+          <label htmlFor="usuario">E-mail</label>
           <div className={styles.inputWrapper}>
             <input
               type="text"
               id="usuario"
-              placeholder="Ex: jhonasrodrigues"
+              placeholder="Ex: vc@gmail.com"
               className={styles.input}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
