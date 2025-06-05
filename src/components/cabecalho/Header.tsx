@@ -25,7 +25,7 @@ export default function Header() {
         <Link href="/ingredients" className={pathname === '/ingredientes' ? styles.active : ''}>
           Ingredientes
         </Link>
-        <Link href="/relatorio" className={pathname === '/relatorios' ? styles.active : ''}>
+        <Link href="/relatorios" className={pathname === '/relatorios' ? styles.active : ''}>
           Relatório
         </Link>
       </nav>

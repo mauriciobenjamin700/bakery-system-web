@@ -35,10 +35,16 @@
     font-size: 25px;
 }
 
+/* iconButtom {
+    width: 16px;
+    height: auto;
+} */
+
 .title {
     display: flex;
     gap: 460px;
     position: relative; /* Necessário para posicionar o dropdownMenu absolutamente */
+    margin-bottom: 10px;
 }
 
 .buttonFilter {
