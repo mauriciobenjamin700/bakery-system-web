@@ -13,6 +13,27 @@
   font-weight: bold;
 }
 
+.logout {
+  margin-left: 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.logoutIcon {
+  width: 24px;
+  height: 24px;
+  filter: invert(1) brightness(2);
+  transition: filter 0.2s;
+}
+
+.logout:hover .logoutIcon {
+  filter: invert(24%) sepia(99%) saturate(748%) hue-rotate(340deg) brightness(90%) contrast(92%);
+}
+
 .nav {
   flex: 1;
   display: flex;

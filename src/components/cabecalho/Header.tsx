@@ -1,4 +1,3 @@
-// app/components/Header.tsx
 'use client'
 
 import Link from 'next/link'
@@ -7,6 +6,11 @@ import styles from './Header.module.css'
 
 export default function Header() {
   const pathname = usePathname()
+
+  function handleLogout() {
+    // Adicione aqui a lógica para limpar tokens/cookies se necessário
+    window.location.href = '/login'
+  }
 
   return (
     <header className={styles.header}>
@@ -25,6 +29,9 @@ export default function Header() {
           Relatório
         </Link>
       </nav>
+      <button className={styles.logout} onClick={handleLogout} title="Sair">
+        <img src="/sair 1.svg" alt="Sair" className={styles.logoutIcon} />
+      </button>
     </header>
   )
 }
