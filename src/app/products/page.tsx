@@ -8,6 +8,11 @@ import ProdutoDetalhes from '../../components/Modulos/ProdutosDetalhes'
 import FiltroModal from '../../components/Modulos/FiltroModal'
 import CadastroModal from '../../components/Modulos/CadastroModal' // O CadastroModal dos produtos
 
+// Importe ou defina o ProdutoEditar. Por enquanto, vou usar um placeholder.
+// Você precisará criar ou fornecer este componente.
+import ProdutoEditar from '../../components/Modulos/ProdutoEditar'; 
+
+
 // Definição da MeasureEnum, deve ser igual à de ProdutosDetalhes
 type MeasureEnum = 'UN' | 'KG' | 'G' | 'L' | 'ML';
 
@@ -81,6 +86,8 @@ export default function Produtos() {
   const [detalhesProduto, setDetalhesProduto] = useState<Produto | null>(null)
   const [showFiltro, setShowFiltro] = useState(false)
   const [showCadastro, setShowCadastro] = useState(false)
+  // CORREÇÃO: Novo estado para editar PRODUTO, não ingrediente
+  const [editarProduto, setEditarProduto] = useState<Produto | null>(null);
 
   const produtosFiltrados = produtos.filter((p) =>
     p.name.toLowerCase().includes(search.toLowerCase()) 
@@ -104,6 +111,21 @@ export default function Produtos() {
     }
     setProdutos([novo, ...produtos])
   }
+
+  // CORREÇÃO: Função para remover produto, ID deve ser number
+  const removerProduto = (id: number) => {
+    setProdutos(produtos.filter((p) => p.id !== id));
+  }
+
+  // NOVA FUNÇÃO: Para atualizar um produto (passada para ProdutoEditar)
+  const atualizarProduto = (produtoEditado: Produto) => {
+    const atualizados = produtos.map((p) =>
+      p.id === produtoEditado.id ? produtoEditado : p
+    );
+    setProdutos(atualizados);
+    setEditarProduto(null); // Fecha o modal de edição
+  };
+
 
   return (
     <div className={styles.container}>
@@ -136,30 +158,66 @@ export default function Produtos() {
 
         <div className={styles.grid}>
           {produtosFiltrados.map((produto) => (
-            <div className={styles.card} key={produto.id} onClick={() => setDetalhesProduto(produto)}>
-             
-              <Image 
-                src={produto.imagem || 'https://placehold.co/300x200/CCCCCC/000000?text=Sem+Imagem'} 
-                alt={produto.name} 
-                className={styles.image} 
-                width={300}
-                height={200} 
-                objectFit="cover"
-              />
+            <div className={styles.card} key={produto.id}> {/* Adicionei key aqui se já não houver uma */}
+              <div className={styles.imageWrapper}>
+                <Image 
+                  src={produto.imagem || 'https://placehold.co/300x200/CCCCCC/000000?text=Sem+Imagem'} 
+                  alt={produto.name} 
+                  className={styles.image} 
+                  width={300}
+                  height={200} 
+                  objectFit="cover"
+                />
+                <button
+                      className={styles.iconOverlay}
+                      onClick={() => setDetalhesProduto(produto)}
+                      title="Ver detalhes"
+                    >
+                      <Image width="20" height="20" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1" />
+                    </button>
+
+              </div>
+
+
               <div className={styles.cardContent}>
                 
                 <h3>{produto.name}</h3> 
                 <p>Quantidade: {produto.quantity}</p> 
                 <p>Preço: R$ {produto.price_sale.toFixed(2)}</p> 
               </div>
+
               <div className={styles.cardFooter}>
-                <button className={styles.acessar}>
-                  Acessar
-                </button>
+                  <button
+                    className={styles.remover}
+                    onClick={() => removerProduto(produto.id)} 
+                    title="Remover"
+                  >
+                    <Image
+                      width="20"
+                      height="20"
+                      src="https://img.icons8.com/ios-glyphs/30/filled-trash.png"
+                      alt="Remover"
+                    />
+                  </button>
+
+                  <button
+                    className={styles.acessar}
+                    onClick={() => setEditarProduto(produto)} 
+                    title="Editar"
+                  >
+                    <Image
+                      width="20"
+                      height="20"
+                      src="https://img.icons8.com/material-outlined/24/pencil--v1.png"
+                      alt="Editar"
+                      className={styles.icon}
+                    />
+                    <span>Editar</span>
+                  </button>
               </div>
-            </div>
-          ))}
-        </div>
+            </div> // CORREÇÃO: Fechar div do styles.card
+          ))} {/* CORREÇÃO: Fechar o parêntese do map */}
+        </div> {/* Fecha div do styles.grid */}
       </main>
 
       {detalhesProduto && (
@@ -172,6 +230,15 @@ export default function Produtos() {
 
       {showCadastro && (
         <CadastroModal onCadastrarAction={cadastrarProduto} onCloseAction={() => setShowCadastro(false)} />
+      )}
+
+      {/* NOVO: Modal de Edição de Produto */}
+      {editarProduto && (
+        <ProdutoEditar
+          produto={editarProduto}
+          onSaveAction={atualizarProduto}
+          onCloseAction={() => setEditarProduto(null)}
+        />
       )}
     </div>
   )
