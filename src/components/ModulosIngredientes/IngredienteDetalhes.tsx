@@ -1,6 +1,6 @@
 // components/ModulosIngredientes/IngredienteDetalhes.tsx
 'use client'
-
+import Image from 'next/image';
 import styles from './Modal.module.css'
 
 interface Ingrediente {
@@ -18,15 +18,15 @@ interface Ingrediente {
 
 interface Props {
   ingrediente: Ingrediente
-  onClose: () => void
+  onCloseAction: () => void
 }
 
-export default function IngredienteDetalhes({ ingrediente, onClose }: Props) {
+export default function IngredienteDetalhes({ ingrediente, onCloseAction }: Props) {
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <h2>📦 Detalhes do Ingrediente</h2>
-        <img
+        <Image
           src={ingrediente.image_path || 'https://via.placeholder.com/200'}
           alt={ingrediente.name}
           className={styles.image}
@@ -38,7 +38,7 @@ export default function IngredienteDetalhes({ ingrediente, onClose }: Props) {
         <p><strong>Preço:</strong> R$ {ingrediente.value.toFixed(2)}</p>
         <p><strong>Validade:</strong> {ingrediente.validity || '---'}</p>
         <p><strong>Marca:</strong> {ingrediente.mark || '---'}</p>
-        <button className={styles.closeButton} onClick={onClose}>Fechar</button>
+        <button className={styles.closeButton} onClick={onCloseAction}>Fechar</button>
       </div>
     </div>
   )

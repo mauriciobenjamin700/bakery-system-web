@@ -1,5 +1,5 @@
 'use client'
-
+import Image from 'next/image'; 
 import { useState, useEffect } from 'react'
 import styles from './ingredients.module.css'
 import { FiSearch, FiSliders } from 'react-icons/fi'
@@ -129,17 +129,19 @@ export default function Ingredientes() {
             ingredientesFiltrados.map((ing) => (
               <div className={styles.card} key={ing.id}>
                 <div className={styles.imageWrapper}>
-                  <img
+                  <Image
                     src={ing.image_path || 'https://via.placeholder.com/150'}
                     alt={ing.name}
                     className={styles.image}
+                    width={150}
+                    height={100}
                   />
                   <button
                     className={styles.iconOverlay}
                     onClick={() => setDetalhesIngrediente(ing)}
                     title="Ver detalhes"
                   >
-                    <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1" />
+                    <Image width="20" height="20" src="https://img.icons8.com/ios-filled/50/search--v1.png" alt="search--v1" />
                   </button>
                 </div>
 
@@ -156,7 +158,7 @@ export default function Ingredientes() {
                     onClick={() => removerIngrediente(ing.id)}
                     title="Remover"
                   >
-                    <img
+                    <Image
                       width="20"
                       height="20"
                       src="https://img.icons8.com/ios-glyphs/30/filled-trash.png"
@@ -168,7 +170,7 @@ export default function Ingredientes() {
                     className={styles.acessar}
                     onClick={() => setEditarIngrediente(ing)}
                   >
-                    <img
+                    <Image
                       width="20"
                       height="20"
                       src="https://img.icons8.com/material-outlined/24/pencil--v1.png"
@@ -191,7 +193,7 @@ export default function Ingredientes() {
       {detalhesIngrediente && (
         <IngredienteDetalhes
           ingrediente={detalhesIngrediente}
-          onClose={() => setDetalhesIngrediente(null)}
+          onCloseAction={() => setDetalhesIngrediente(null)}
         />
       )}
 
