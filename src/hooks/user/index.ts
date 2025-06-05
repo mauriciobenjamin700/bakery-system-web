@@ -19,7 +19,7 @@ export function useClearUser() : () => void {
   };
 }
 
-export function useisUserLoggedIn() : boolean {
+export function useIsUserLoggedIn() : boolean {
   const user = useGetUser();
   return user !== null;
 }

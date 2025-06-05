@@ -12,13 +12,6 @@ Crie um arquivo `.env` e coloque o seguinte conteúdo para testes
 NEXT_PUBLIC_API_URL="http://localhost:8000"
 ```
 
-Quando for usar em produção, troque para
-
-```bash
-NEXT_PUBLIC_API_URL="http://bakery-system-api:8000"
-
-```
-
 ## Rode em Desenvolvimento
 
 Use `npm run dev` para rodar o projeto local em modo de desenvolvimento
@@ -29,5 +22,5 @@ Use `npm run dev` para rodar o projeto local em modo de desenvolvimento
 name="admin",
 phone="89912345678",
 email="admin@email.com",
-password="  ",
+password="adminPassword@123",
 ```
