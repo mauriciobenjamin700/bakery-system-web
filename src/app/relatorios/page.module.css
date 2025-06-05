@@ -1,0 +1,331 @@
+.relatoriospage {
+    width: 70%;
+    /* largura da pagina*/
+    height: 70%;
+    /* altura da pagina*/
+    /* margin-top: 100px; */
+    /* espaço acima*/
+    /* cor de fundo*/
+    min-height: 100vh;
+    /* altura minima*/
+    display: flex;
+    /* flexbox para centralizar o conteúdo */
+    flex-direction: column;
+    /* direção da coluna */
+    justify-content: center; /* Isso centraliza verticalmente o conteúdo dentro da página */
+    align-items: center;
+    /* centraliza horizontalmente */
+    margin-top: 20px;
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.conteiner {
+    flex: 1;
+    /* padding-top: 77px; */
+    /* Altura do Header */
+    padding: 20px;
+}
+
+.pageTitleP {
+    color: #8E3400;
+    text-align: left;
+   font-size: 25px;
+}
+
+.title {
+    display: flex;
+    gap: 460px;
+    position: relative; /* Necessário para posicionar o dropdownMenu absolutamente */
+}
+
+.buttonFilter {
+    position: relative;
+    font-size: 20px;
+    width: 200px;
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 20px;
+    color: #8E3400;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer; /* Indica que o botão é clicável */
+   
+}
+
+.iconButtom {
+    width: 16px;
+    height: auto;
+}
+.menu {
+    list-style: none;
+    gap: 20px;
+    color: #8E3400;
+    
+}
+
+.menu button{
+    list-style: none;
+    gap: 10px;
+    font-size: 20px;
+    color: #8E3400;
+    
+}
+
+.dropdownMenu {
+    
+    position: absolute;
+    top: calc(100% - 5px); /* Posiciona abaixo do botão */
+    right: 550px;
+    background-color:white;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10; /* Garante que o menu fique acima de outros elementos */
+    width: 200px; /* Mesma largura do botão */
+    
+}
+
+.dropdownMenu button {
+    
+    display: block;
+    width: 60%;
+    padding: 5px;
+    text-align: left;
+    border: none;
+    background-color: transparent;
+    color: #8E3400;
+    cursor: pointer;
+}
+
+.dropdownMenu button:hover {
+    background-color: #CBA28A;
+    border-radius: 20px;
+}
+
+.pageTitle {
+    color: #8E3400;
+    text-align: left;
+    size: 25px;
+    position: absolute;
+    /* Permite posicionar o título independentemente do fluxo */
+    top: 10px;
+    /* Alinha ao topo do padding do card */
+    left: 30px;
+    /* Alinha à esquerda do padding do card */
+    margin: 0;
+
+}
+
+
+.relatoriosContainer {
+    /* top: 512; */
+    width: 100%;
+    /* largura do container */
+    display: grid;
+    /* usa grid para layout */
+    grid-template-columns: 3fr 1fr;
+    /* Duas colunas de igual largura (você pode ajustar as frações) */
+
+    /* duas colunas */
+    /* espaço acima do container */
+    background-color: white;
+    align-items: start;
+}
+
+
+
+/*Estilização dos mini cards*/
+.miniCards {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    /* justify-content: space-around; */ /* Distribui os minicards horizontalmente */
+}
+
+.mini {
+    width: 175px;
+    height: 100px;
+    background-color: #CBA28A;
+    border-radius: 20px;
+    box-shadow: 0 2px 12px -2px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.teste {
+    display: flex; /* Para alinhar minicards e gráfico de linhas lado a lado (se desejado) */
+    flex-direction: column; /* Para colocar minicards acima do gráfico de linhas */
+    gap: 10px;
+}
+
+.mini:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px -7px rgba(0, 0, 0, 0.3);
+}
+
+.miniCards .mini h3 {
+    text-align: left;
+    position: absolute;
+    font-size: 15px;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-weight: normal;
+}
+
+/*Aqui é a estilização dos minicard de cor diferente*/
+.mini1 {
+    background-color: #FEF7F3;
+    width: 175px;
+    height: 100px;
+    border-radius: 20px;
+    box-shadow: 0 2px 12px -2px rgba(0, 0, 0, 0.3);
+
+}
+
+.miniCards .mini1 h3 {
+    text-align: left;
+    position: absolute;
+    font-size: 15px;
+    margin-left: 20px;
+    margin-top: 20px;
+    font-weight: normal;
+}
+
+.mini1:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px -7px rgba(0, 0, 0, 0.3);
+}
+
+/* aqui  */
+.relatoriosContainer > .teste {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    display: flex;
+    flex-direction: column; /* Coloca minicards acima do gráfico de linhas */
+    gap: 20px;
+}
+
+/*-----------------------------*/
+
+
+/* Estilização Gráfio de linhas */
+
+.cardLine {
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 12px -2px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 40px 100px 40px 40px;
+    transition: all 400ms ease;
+    background-color: #FEF7F3;
+    position: relative;
+    margin-right: 20px;
+}
+
+.lineChart {
+    width: 600px;
+    height: 405px;
+    /* align-self: center; */
+}
+
+.cardLine:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px -7px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------------------------------------- */
+
+/* Estilização Gráfio de barras */
+
+.chartsContainer {
+
+    justify-content: flex-end;
+
+}
+
+.barChart {
+    width: 400px;
+    height: 100%;
+    margin-top: 20px;
+    /* espaço acima do container */
+}
+
+.bar {
+    margin-bottom: 30px;
+    /* adicona margem de 30px abaixo do gráfico de linha */
+}
+
+/* ---------------------------------------- */
+
+/* Estilização Gráfio Donut */
+.card {
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 12px -2px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 40px 100px 40px 40px;
+    transition: all 400ms ease;
+    background-color: #FEF7F3;
+    position: relative;
+
+
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 16px -7px rgba(0, 0, 0, 0.3);
+}
+
+.card>* {
+    /* Aplica a todos os filhos diretos de .card */
+    margin-right: 30px;
+    /* Adiciona 20px de margem à direita de cada item */
+}
+
+.card>*:last-child {
+    /* Remove a margem direita do último item para evitar espaço extra no final */
+    margin-right: 0;
+}
+
+.details {
+    margin: 10px;
+}
+
+.card .details ul {
+    list-style: none;
+    padding: 0;
+
+}
+
+.card .details ul li {
+    font-size: 16px;
+    margin: 12px 0;
+    display: flex;
+    /* Transforma o li em um container flexível */
+    justify-content: flex-start;
+    /* Alinha os itens à esquerda */
+}
+
+.card .details .percentage {
+    font-weight: 700;
+    color: blueviolet;
+    margin-right: 5px;
+    /* Adiciona espaço entre a porcentagem e o nome */
+}
+
+.myChart {
+    width: 200px;
+}
+
+/* ---------------------------------------- */
+
+.relatoriosContainer>.chartsContainer {
+    grid-row-start: 1;
+    grid-column-start: 2;
+   
+}
