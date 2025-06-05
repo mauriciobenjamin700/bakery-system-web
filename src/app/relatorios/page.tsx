@@ -58,7 +58,7 @@ export default function Relatorios() {
                            
                             <Image
                                 className={style.iconButtom}
-                                src="https://img.icons8.com/ios-glyphs/30/expand-arrow--v1.png"
+                                src= "https://img.icons8.com/ios-glyphs/30/expand-arrow--v1.png"
                                 alt="Seta para expandir/recolher menu" 
                                 width={30} 
                                 height={30} 
@@ -78,13 +78,13 @@ export default function Relatorios() {
                     <div className={style.relatoriosContainer}>
 
                         <div className={style.teste}>
-                            <div className={style.miniCards}> {/*aqui são so minicards */}
+                            <div className={style.miniCards}> 
                                 <div className={style.mini1}><h3>Total no Caixa</h3> </div>
                                 <div className={style.mini}> <h3>Entrada no caixa</h3> </div>
                                 <div className={style.mini1}> <h3>Retirada do caixa</h3></div>
                                 <div className={style.mini}>  <h3>Active users</h3></div>
                             </div>
-                            <div > {/* grafico de linhas*/}
+                            <div > 
                                 <div className={style.cardLine}>
                                     <div> <h3 className={style.pageTitle}>Produtos mais Vendidos</h3></div>
                                     <div>
@@ -96,7 +96,7 @@ export default function Relatorios() {
 
                         <div className={style.chartsContainer}>
 
-                            <div className={style.bar}> {/*Grafico de barras */}
+                            <div className={style.bar}> 
                                 <div>
                                     <div className={style.card}>
                                         <div> <h3 className={style.pageTitle}>Produtos mais Vendidos</h3></div>
