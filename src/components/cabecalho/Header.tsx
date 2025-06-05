@@ -1,5 +1,5 @@
 'use client'
-
+import Image from 'next/image';
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import styles from './Header.module.css'
@@ -30,7 +30,7 @@ export default function Header() {
         </Link>
       </nav>
       <button className={styles.logout} onClick={handleLogout} title="Sair">
-        <img src="/sair 1.svg" alt="Sair" className={styles.logoutIcon} />
+        <Image src="/sair 1.svg" alt="Sair" className={styles.logoutIcon} />
       </button>
     </header>
   )

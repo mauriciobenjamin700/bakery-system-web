@@ -191,7 +191,7 @@ export default function Ingredientes() {
       {detalhesIngrediente && (
         <IngredienteDetalhes
           ingrediente={detalhesIngrediente}
-          onClose={() => setDetalhesIngrediente(null)}
+          onCloseAction={() => setDetalhesIngrediente(null)}
         />
       )}
 

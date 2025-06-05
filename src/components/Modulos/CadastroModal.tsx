@@ -10,24 +10,32 @@ interface PortionRequest {
 
 type MeasureEnum = 'UN' | 'KG' | 'G' | 'L' | 'ML' // Exemplo, ajuste conforme seu enum real
 
-interface Props {
-  onCadastrar: (produto: {
-    name: string
-    price_cost: number
-    price_sale: number
-    measure: MeasureEnum
-    description: string
-    mark: string
-    min_quantity: number
-    recipe: PortionRequest[] | null
-    quantity: number
-    validity: string | null
-  }) => void
-  // CORREÇÃO: Propriedade renomeada para onCloseAction
-  onCloseAction: () => void
+// Definição completa da interface Produto para o tipo Omit<Produto, 'id'>
+// Isso é necessário porque o CadastroModal agora precisa receber todas as propriedades
+// que a página de produtos está a passar para um novo Produto, exceto o 'id'.
+interface ProdutoCompletoParaCadastro {
+  name: string;
+  price_cost: number;
+  price_sale: number;
+  measure: MeasureEnum;
+  description: string;
+  mark: string;
+  min_quantity: number;
+  recipe: PortionRequest[] | null;
+  quantity: number;
+  validity: string | null;
+  imagem: string; 
 }
 
-export default function CadastroModal({ onCadastrar, onClose }: Props) {
+
+interface Props {
+  // CORREÇÃO: onCadastrarAction agora espera o tipo completo de produto (exceto o id)
+  onCadastrarAction: (produto: ProdutoCompletoParaCadastro) => void;
+  
+  onCloseAction: () => void; 
+}
+
+export default function CadastroModal({ onCadastrarAction, onCloseAction }: Props) {
   const [name, setName] = useState('')
   const [priceCost, setPriceCost] = useState('')
   const [priceSale, setPriceSale] = useState('')
@@ -37,7 +45,28 @@ export default function CadastroModal({ onCadastrar, onClose }: Props) {
   const [minQuantity, setMinQuantity] = useState('')
   const [quantity, setQuantity] = useState('')
   const [validity, setValidity] = useState('')
-  const [recipe, setRecipe] = useState<PortionRequest[] | null>(null)
+  // O estado 'recipe' não possui input no formulário, mantido para corresponder à interface
+  const [recipe] = useState<PortionRequest[] | null>(null) 
+  const [imagem, setImagem] = useState(''); 
+
+
+  const handleCadastrar = () => {
+    // CORREÇÃO: Certificar-se de que todos os campos da interface ProdutoCompletoParaCadastro são enviados
+    onCadastrarAction({
+      name,
+      price_cost: Number(priceCost),
+      price_sale: Number(priceSale),
+      measure,
+      description,
+      mark,
+      min_quantity: Number(minQuantity),
+      recipe, // Valor de 'recipe' (atualmente null)
+      quantity: Number(quantity),
+      validity: validity || null,
+      imagem 
+    })
+    onCloseAction() 
+  }
 
   return (
     <div className={styles.overlay}>
@@ -56,26 +85,14 @@ export default function CadastroModal({ onCadastrar, onClose }: Props) {
         <input placeholder="Descrição" value={description} onChange={e => setDescription(e.target.value)} />
         <input placeholder="Marca" value={mark} onChange={e => setMark(e.target.value)} />
         <input placeholder="Quantidade Mínima" type="number" value={minQuantity} onChange={e => setMinQuantity(e.target.value)} />
-        {/* Campo para receita pode ser customizado conforme necessidade */}
         <input placeholder="Quantidade" type="number" value={quantity} onChange={e => setQuantity(e.target.value)} />
         <input placeholder="Validade" type="date" value={validity} onChange={e => setValidity(e.target.value)} />
+        <input placeholder="Link da imagem (URL)" value={imagem} onChange={e => setImagem(e.target.value)} />
+        
         <div className={styles.actions}>
-          <button className={styles.cadastrarButton} onClick={() => {
-            onCadastrar({
-              name,
-              price_cost: Number(priceCost),
-              price_sale: Number(priceSale),
-              measure,
-              description,
-              mark,
-              min_quantity: Number(minQuantity),
-              recipe,
-              quantity: Number(quantity),
-              validity: validity || null
-            })
-            // CORREÇÃO: Chamando onCloseAction
-            onCloseAction()
-          }}>Cadastrar</button>
+          <button className={styles.cadastrarButton} onClick={handleCadastrar}>
+            Cadastrar
+          </button>
           <button className={styles.closeButton} onClick={onCloseAction}>Cancelar</button>
         </div>
       </div>

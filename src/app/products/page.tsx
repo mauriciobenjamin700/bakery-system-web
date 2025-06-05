@@ -6,37 +6,72 @@ import { FiSearch, FiSliders } from 'react-icons/fi'
 import Header from '../../components/cabecalho/Header'
 import ProdutoDetalhes from '../../components/Modulos/ProdutosDetalhes'
 import FiltroModal from '../../components/Modulos/FiltroModal'
-import CadastroModal from '../../components/Modulos/CadastroModal'
+import CadastroModal from '../../components/Modulos/CadastroModal' // O CadastroModal dos produtos
 
+// Definição da MeasureEnum, deve ser igual à de ProdutosDetalhes
+type MeasureEnum = 'UN' | 'KG' | 'G' | 'L' | 'ML';
+
+// A interface Produto agora deve ser mais completa, correspondendo a ProdutosDetalhes
 interface Produto {
-  id: number
-  nome: string
-  quantidade: number
-  preco: number
-  imagem: string
+  id: number;
+  name: string; // Corrigido de 'nome' para 'name'
+  price_cost: number;
+  price_sale: number;
+  measure: MeasureEnum;
+  description: string;
+  mark: string;
+  min_quantity: number;
+  recipe: Array<{
+    ingrediente?: string; // Mantido como opcional, conforme ProdutosDetalhes
+    quantidade?: number; // Mantido como opcional, conforme ProdutosDetalhes
+  }> | null;
+  quantity: number; // Corrigido de 'quantidade' para 'quantity'
+  validity: string | null;
+  imagem?: string; // Corrigido de 'imagem' para 'imagem?' (opcional)
 }
 
 const produtosMock: Produto[] = [
   {
     id: 1,
-    nome: 'Pão de Queijo Tradicional',
-    quantidade: 120,
-    preco: 0.75,
-    imagem: 'https://www.panetteria.com.br/images/Marraqueta.jpg',
+    name: 'Pão de Queijo Tradicional', // Corrigido
+    quantity: 120, // Corrigido
+    price_cost: 0.50, // Adicionado
+    price_sale: 0.75, // Corrigido
+    measure: 'UN', // Adicionado
+    description: 'Pão de queijo tradicional de receita caseira.', // Adicionado
+    mark: 'Caseiro', // Adicionado
+    min_quantity: 10, // Adicionado
+    recipe: null, // Adicionado
+    validity: null, // Adicionado
+    imagem: 'https://cdn.2rscms.com.br/imgcache/5054/uploads/5054/layout/Linha%20Gold%20Paes/pao-frances-12h.png.webp', 
   },
   {
     id: 2,
-    nome: 'Pão Integral',
-    quantidade: 80,
-    preco: 1.2,
-    imagem: 'https://www.panetteria.com.br/images/Marraqueta.jpg',
+    name: 'Pão Integral', // Corrigido
+    quantity: 80, // Corrigido
+    price_cost: 0.90, // Adicionado
+    price_sale: 1.2, // Corrigido
+    measure: 'UN', // Adicionado
+    description: 'Pão integral 100% natural, rico em fibras.', // Adicionado
+    mark: 'Natural Vida', // Adicionado
+    min_quantity: 5, // Adicionado
+    recipe: null, // Adicionado
+    validity: null, // Adicionado
+    imagem: 'https://cdn.2rscms.com.br/imgcache/5054/uploads/5054/layout/Linha%20Gold%20Paes/pao-frances-12h.png.webp', 
   },
   {
     id: 3,
-    nome: 'Croissant de Presunto',
-    quantidade: 50,
-    preco: 2.5,
-    imagem: 'https://www.panetteria.com.br/images/Marraqueta.jpg',
+    name: 'Croissant de Presunto', // Corrigido
+    quantity: 50, // Corrigido
+    price_cost: 2.00, // Adicionado
+    price_sale: 2.5, // Corrigido
+    measure: 'UN', // Adicionado
+    description: 'Croissant folhado com recheio de presunto e queijo.', // Adicionado
+    mark: 'Delícias da Padaria', // Adicionado
+    min_quantity: 3, // Adicionado
+    recipe: null, // Adicionado
+    validity: null, // Adicionado
+    imagem: 'https://cdn.2rscms.com.br/imgcache/5054/uploads/5054/layout/Linha%20Gold%20Paes/pao-frances-12h.png.webp', 
   },
 ]
 
@@ -48,15 +83,15 @@ export default function Produtos() {
   const [showCadastro, setShowCadastro] = useState(false)
 
   const produtosFiltrados = produtos.filter((p) =>
-    p.nome.toLowerCase().includes(search.toLowerCase())
+    p.name.toLowerCase().includes(search.toLowerCase()) 
   )
 
   const aplicarFiltro = (nome: string, min: number, max: number) => {
     setProdutos(
       produtosMock.filter((p) =>
-        p.nome.toLowerCase().includes(nome.toLowerCase()) &&
-        p.preco >= min &&
-        p.preco <= max
+        p.name.toLowerCase().includes(nome.toLowerCase()) && 
+        p.price_sale >= min && 
+        p.price_sale <= max 
       )
     )
     setShowFiltro(false)
@@ -65,7 +100,7 @@ export default function Produtos() {
   const cadastrarProduto = (novoProduto: Omit<Produto, 'id'>) => {
     const novo: Produto = {
       ...novoProduto,
-      id: produtos.length + 1
+      id: produtos.length > 0 ? Math.max(...produtos.map(p => p.id)) + 1 : 1 
     }
     setProdutos([novo, ...produtos])
   }
@@ -102,11 +137,20 @@ export default function Produtos() {
         <div className={styles.grid}>
           {produtosFiltrados.map((produto) => (
             <div className={styles.card} key={produto.id} onClick={() => setDetalhesProduto(produto)}>
-              <Image src={produto.imagem} alt={produto.nome} className={styles.image} />
+             
+              <Image 
+                src={produto.imagem || 'https://placehold.co/300x200/CCCCCC/000000?text=Sem+Imagem'} 
+                alt={produto.name} 
+                className={styles.image} 
+                width={300}
+                height={200} 
+                objectFit="cover"
+              />
               <div className={styles.cardContent}>
-                <h3>{produto.nome}</h3>
-                <p>Quantidade: {produto.quantidade}</p>
-                <p>Preço: R$ {produto.preco.toFixed(2)}</p>
+                
+                <h3>{produto.name}</h3> 
+                <p>Quantidade: {produto.quantity}</p> 
+                <p>Preço: R$ {produto.price_sale.toFixed(2)}</p> 
               </div>
               <div className={styles.cardFooter}>
                 <button className={styles.acessar}>
@@ -119,7 +163,7 @@ export default function Produtos() {
       </main>
 
       {detalhesProduto && (
-        <ProdutoDetalhes produto={detalhesProduto} onClose={() => setDetalhesProduto(null)} />
+        <ProdutoDetalhes produto={detalhesProduto} onCloseAction={() => setDetalhesProduto(null)} /> 
       )}
 
       {showFiltro && (
