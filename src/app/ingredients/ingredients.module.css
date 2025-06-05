@@ -185,10 +185,8 @@
   background: rgba(227, 227, 227, 0.8);  /* Cor de fundo com transparência */
 }
 
-.iconOverlay:hover {
-  img {
-    filter: brightness(0) invert(1); /* Deixa o ícone branco ao hover */
-  }
+.iconOverlay:hover img {
+  filter: brightness(0) invert(1); /* Deixa o ícone branco ao hover */
   transform: scale(1.2);
   background: #000000;  /* Cor de fundo mais clara e suave com transparência */
 }
