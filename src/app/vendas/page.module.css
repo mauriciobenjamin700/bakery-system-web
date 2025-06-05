@@ -1,0 +1,295 @@
+.vendasPage {
+  width: 70%;
+  /* largura da pagina*/
+  height: 70%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.conteiner {
+  flex: 1;
+  padding-top: 77px;
+  /* Altura do Header */
+  padding: 20px;
+}
+
+.pageTitle {
+
+  /* tamanho da fonte */
+  color: #8E3400;
+  /* cor do texto */
+  /* margin-bottom: 20px; */
+  /* espaço abaixo do título */
+  text-align: left;
+  /* centraliza o texto */
+  margin-top: 20px;
+  /* espaço acima do título */
+  font-size: 25px;
+
+}
+
+.vendaContainer {
+  width: 100%;
+  /* largura do container */
+  display: grid;
+  /* usa grid para layout */
+  grid-template-columns: 2fr 1fr;
+  /* duas colunas */
+  gap: 30px;
+  /* espaço entre os itens */
+  margin-top: 20px;
+  /* espaço acima do container */
+}
+
+.listaItens {
+  background-color: #FBFBFB;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 500px;
+  /* Defina a altura máxima desejada */
+  overflow-y: auto;
+  position: relative;
+  /* Necessário para posicionar o total fixo absolutamente */
+}
+
+.tabelaVendas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+  position: relative;
+  /* Espaço para o total fixo não sobrepor a última linha */
+}
+
+
+.tabelaVendas td {
+  width: 9px;
+  height: 80px;
+  /* padding: 5px; */
+
+
+  /* preenchimento interno */
+  /* border-bottom: 1px solid #8E3400; */
+  box-shadow: 0 1px 0px rgba(0, 0, 0, 0.1);
+  /* borda inferior */
+  text-align: left;
+  /* alinha texto à esquerda */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.tabelaVendas tr>th {
+  width: 30px;
+  height: 20px;
+  padding: 10px;
+  text-align: left;
+  font-weight: bold;
+  /* negrito */
+  color: black;
+  /* cor do texto */
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+.tabelaVendas th:last-child,
+.tabelaVendas td:last-child {
+  text-align: right;
+  /* Alinha a última coluna (ações) à direita */
+}
+
+.tabelaVendas tbody tr:last-child td {
+  border-bottom: none;
+  /* remove borda inferior da última linha */
+}
+
+/* Aqui tentando fazer o cabeçalho e rodapé fixos */
+
+.tabelaVendas thead>tr>th {
+  position: sticky;
+  top: 0;
+  /* fixa o cabeçalho no topo */
+  background-color: #dddfeb;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+  ;
+
+}
+
+.totalFixed {
+  position: sticky;
+  bottom: 0;
+  /* fixa o elemento na parte inferior */
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px 40px;
+  border-top: 1px solid #eee;
+  font-weight: bold;
+  font-size: 1.3rem;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* ---------------------------------------- */
+
+.removerItem {
+  background: none;
+  /* fundo transparente */
+  border: none;
+  /* sem borda */
+  cursor: pointer;
+  /* cursor de ponteiro */
+  padding: 0;
+  /* sem preenchimento */
+  display: flex;
+  justify-content: flex-end;
+}
+
+.totalLabel {
+  font-weight: bold;
+}
+
+.totalValue {
+  font-weight: bold;
+  align-items: right;
+  min-width: 100px;
+  /* alinha à direita */
+
+}
+
+
+.adicionarItem {
+  background-color: none;
+  /* cor de fundo */
+  border-radius: 8px;
+  /* bordas arredondadas */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+  padding: 20px;
+  /* preenchimento interno */
+
+}
+
+.tilteAdd {
+  font-size: 1.4rem;
+  /* tamanho da fonte */
+  color: #8E3400;
+}
+
+.inputGroup {
+  margin-bottom: 15px;
+  /* espaço abaixo do grupo de inputs */
+
+}
+
+.inputGroup label {
+  display: block;
+  /* exibe como bloco */
+  font-weight: bold;
+  color: black;
+  margin-bottom: 7px;
+  /* espaço abaixo do rótulo */
+}
+
+.input {
+  width: 100%;
+  /* largura total */
+  padding: 10px;
+  /* preenchimento interno */
+
+  /* borda */
+  border-radius: 8px;
+  /* bordas arredondadas */
+  font-size: 1rem;
+  /* tamanho da fonte */
+  color: #333;
+  /* cor do texto */
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+  ;
+}
+
+.input,
+.select {
+  width: calc(100% - 12px);
+  /* largura total menos o preenchimento */
+  padding: 10px;
+  /* preenchimento interno */
+  border: 0.1px solid #f8f4f4;
+  /* borda */
+  border-radius: 8px;
+  /* bordas arredondadas */
+  font-size: 1rem;
+  /* tamanho da fonte */
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+  ;
+}
+
+.confirmarAdicionar {
+  background-color: #008E09;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 26.13px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+  width: 100%;
+  /* largura total */
+
+}
+
+.confirmarAdicionar:hover {
+  background-color: #093a0d;
+}
+
+.thead {
+  width: 100%;
+  background-color: #f3f4f8;
+}
+
+.acoesVenda {
+
+  margin-top: 225px;
+  /* espaço acima */
+  display: flex;
+  /* usa flexbox para layout */
+  justify-content: right;
+  /* alinha à direita */
+  gap: 10px;
+  /* espaço entre os botões */
+}
+
+
+.cancelarVenda,
+.confirmarVenda {
+  width: 100%;
+  /* largura total */
+  padding: 10px 20px;
+  border-radius: 26.13px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cancelarVenda {
+  background-color: none;
+  color: black;
+  border: none;
+}
+
+.cancelarVenda:hover {
+  background-color: #c82333;
+}
+
+.confirmarVenda {
+  background-color: #008E09;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.confirmarVenda:hover {
+  background-color: #093a0d;
+}

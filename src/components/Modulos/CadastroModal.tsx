@@ -23,7 +23,8 @@ interface Props {
     quantity: number
     validity: string | null
   }) => void
-  onClose: () => void
+  // CORREÇÃO: Propriedade renomeada para onCloseAction
+  onCloseAction: () => void
 }
 
 export default function CadastroModal({ onCadastrar, onClose }: Props) {
@@ -72,9 +73,10 @@ export default function CadastroModal({ onCadastrar, onClose }: Props) {
               quantity: Number(quantity),
               validity: validity || null
             })
-            onClose()
+            // CORREÇÃO: Chamando onCloseAction
+            onCloseAction()
           }}>Cadastrar</button>
-          <button className={styles.closeButton} onClick={onClose}>Cancelar</button>
+          <button className={styles.closeButton} onClick={onCloseAction}>Cancelar</button>
         </div>
       </div>
     </div>
