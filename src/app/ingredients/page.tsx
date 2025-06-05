@@ -133,6 +133,8 @@ export default function Ingredientes() {
                     src={ing.image_path || 'https://via.placeholder.com/150'}
                     alt={ing.name}
                     className={styles.image}
+                    width={150}
+                    height={100}
                   />
                   <button
                     className={styles.iconOverlay}

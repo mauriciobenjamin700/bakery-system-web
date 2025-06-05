@@ -30,8 +30,14 @@ export default function Header() {
         </Link>
       </nav>
       <button className={styles.logout} onClick={handleLogout} title="Sair">
-        <Image src="/sair 1.svg" alt="Sair" className={styles.logoutIcon} />
-      </button>
+  <Image
+    src="/sair 1.svg"
+    alt="Sair"
+    className={styles.logoutIcon}
+    width={24}
+    height={24}
+  />
+</button>
     </header>
   )
 }
