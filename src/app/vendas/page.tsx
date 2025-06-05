@@ -3,8 +3,8 @@
 import Header from '../../components/cabecalho/Header';
 import style from './page.module.css';
 import { useState } from 'react';
-import Image from 'next/image';
-import React from 'react';
+import Image from 'next/image'; // This import was unused, but now it will be used!
+import React from 'react'; // This import was unused, so it will be removed if not needed elsewhere
 
 interface ItemVenda {
     id: number;
@@ -14,29 +14,31 @@ interface ItemVenda {
 }
 
 let nextId = 1;
-const NUM_LINHAS_FIXAS = 6;
+// const NUM_LINHAS_FIXAS = 6; // This variable was unused, so it will be removed.
 
 export default function Vendas() {
     const [vendas, setVendas] = useState<ItemVenda[]>([]);
     const [novoItemNome, setNovoItemNome] = useState('');
     const [novaQuantidade, setNovaQuantidade] = useState<number | undefined>(0);
-    const [novoItemPreco, setNovoItemPreco] = useState<number | undefined>(0);
+    // const [novoItemPreco, setNovoItemPreco] = useState<number | undefined>(0); // This variable was unused, so it will be removed.
 
     const adicionarItem = () => {
-        if (novoItemNome.trim() && novaQuantidade !== undefined) {
+        // Since novoItemPreco was not used, let's ensure '1' is the intended price here.
+        // If the price comes from somewhere else, it needs to be managed.
+        if (novoItemNome.trim() && novaQuantidade !== undefined && novaQuantidade > 0) { // Added novaQuantidade > 0 check
+            const itemPrecoUnitario = 100; // Hardcoding the price as it was in the table. If dynamic, adjust.
             const novoItem: ItemVenda = {
                 id: nextId++,
                 nome: novoItemNome,
                 quantidade: novaQuantidade,
-
-                subtotal: novaQuantidade * 1,
+                subtotal: novaQuantidade * itemPrecoUnitario, // Using the fixed price
             };
             setVendas([...vendas, novoItem]);
             setNovoItemNome('');
             setNovaQuantidade(0);
-            setNovoItemPreco(0);
+            // setNovoItemPreco(0); // This setter was for an unused state variable, so it will be removed.
         } else {
-            alert('Por favor, preencha o nome e a quantidade do produto.');
+            alert('Por favor, preencha o nome e uma quantidade válida do produto.'); // Improved alert message
         }
     };
 
@@ -48,7 +50,12 @@ export default function Vendas() {
         return vendas.reduce((total, venda) => total + venda.subtotal, 0).toFixed(2);
     };
 
-    const linhasParaRenderizar = Array(NUM_LINHAS_FIXAS).fill(null);
+    // const linhasParaRenderizar = Array(NUM_LINHAS_FIXAS).fill(null); // This variable was unused, so it will be removed.
+
+    const calculateEmptyRows = () => {
+        const remainingRows = 6 - vendas.length; // Assuming 6 is still the desired fixed number of rows
+        return remainingRows > 0 ? Array(remainingRows).fill(null) : [];
+    };
 
     return (
         <div>
@@ -59,11 +66,11 @@ export default function Vendas() {
                     <div className={style.vendaContainer}>
                         <div className={style.listaItens}>
                             <table className={style.tabelaVendas}>
-                                <thead >
+                                <thead>
                                     <tr>
                                         <th>Nome</th>
                                         <th>Quantidade</th>
-                                        <th>Preço</th>
+                                        <th>Preço Unit.</th> {/* Changed to Preço Unit. for clarity */}
                                         <th>Subtotal</th>
                                         <th></th>
                                     </tr>
@@ -73,21 +80,23 @@ export default function Vendas() {
                                         <tr key={venda.id}>
                                             <td>{venda.nome}</td>
                                             <td>{venda.quantidade}</td>
-                                            <td> R$ 100</td>
+                                            <td>R$ 100,00</td> {/* Hardcoding price as it was in your HTML */}
                                             <td>{venda.subtotal.toFixed(2)}</td>
                                             <td>
                                                 <button className={style.removerItem} onClick={() => removerItem(venda.id)}>
-                                                    <img
-                                                        width="20"
-                                                        height="20"
+                                                    {/* Replaced <img> with <Image> */}
+                                                    <Image
+                                                        width={20}
+                                                        height={20}
                                                         src="https://img.icons8.com/forma-bold-sharp/24/full-trash.png"
-                                                        alt="full-trash"
+                                                        alt="Remover item"
                                                     />
                                                 </button>
                                             </td>
                                         </tr>
                                     ))}
-                                    {vendas.length < NUM_LINHAS_FIXAS && Array(NUM_LINHAS_FIXAS - vendas.length).fill(null).map((_, index) => (
+                                    {/* Dynamically render empty rows based on remaining space */}
+                                    {calculateEmptyRows().map((_, index) => (
                                         <tr key={`empty-${vendas.length + index}`}>
                                             <td></td>
                                             <td></td>
@@ -124,9 +133,10 @@ export default function Vendas() {
                                     type="number"
                                     id="quantidade"
                                     className={style.select}
-                                    value={novaQuantidade}
+                                    value={novaQuantidade === 0 ? '' : novaQuantidade} // Display empty string for 0 to make placeholder visible
                                     onChange={(e) => setNovaQuantidade(Number(e.target.value))}
                                     placeholder="Quantidade"
+                                    min="0" // Prevent negative quantities
                                 />
                             </div>
 
@@ -137,8 +147,6 @@ export default function Vendas() {
                                 <button className={style.confirmarVenda}>Confirmar</button>
                             </div>
                         </div>
-
-
                     </div>
                 </main>
             </div>

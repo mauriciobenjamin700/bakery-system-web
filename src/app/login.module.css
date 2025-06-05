@@ -89,3 +89,27 @@
 .button:hover {
     background-color: #571f00;
 }
+
+.registerButton {
+  background-color: transparent;
+  color: #6d2e00; /* Cor que combina com seu tema */
+  border: 1px solid #6d2e00;
+  padding: 0.75rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.registerButton:hover {
+  background-color: #6d2e00;
+  color: white;
+}
+
+.registerButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

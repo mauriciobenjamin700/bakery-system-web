@@ -4,16 +4,16 @@ import { useState } from 'react'
 import styles from './Modal.module.css'
 
 interface Props {
-  onCadastrar: (produto: {
+  onCadastrarAction: (produto: {
     nome: string
     preco: number
     quantidade: number
     imagem: string
   }) => void
-  onClose: () => void
+  onCloseAction: () => void
 }
 
-export default function CadastroModal({ onCadastrar, onClose }: Props) {
+export default function CadastroModal({ onCadastrarAction, onCloseAction }: Props) {
   const [nome, setNome] = useState('')
   const [preco, setPreco] = useState('')
   const [quantidade, setQuantidade] = useState('')
@@ -29,15 +29,15 @@ export default function CadastroModal({ onCadastrar, onClose }: Props) {
         <input placeholder="Link da imagem" value={imagem} onChange={(e) => setImagem(e.target.value)} />
         <div className={styles.actions}>
           <button className={styles.cadastrarButton} onClick={() => {
-            onCadastrar({
+            onCadastrarAction({
               nome,
               preco: Number(preco),
               quantidade: Number(quantidade),
               imagem
             })
-            onClose()
+            onCloseAction()
           }}>Cadastrar</button>
-          <button className={styles.closeButton} onClick={onClose}>Cancelar</button>
+          <button className={styles.closeButton} onClick={onCloseAction}>Cancelar</button>
         </div>
       </div>
     </div>

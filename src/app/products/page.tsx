@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image' // Adicione esta importação
 import { useState } from 'react'
 import styles from './Produtos.module.css'
 import { FiSearch, FiSliders } from 'react-icons/fi'
@@ -68,6 +69,7 @@ export default function Produtos() {
       id: produtos.length + 1
     }
     setProdutos([novo, ...produtos])
+    setShowCadastro(false); // Adicionei para fechar o modal após o cadastro
   }
 
   return (
@@ -102,7 +104,15 @@ export default function Produtos() {
         <div className={styles.grid}>
           {produtosFiltrados.map((produto) => (
             <div className={styles.card} key={produto.id} onClick={() => setDetalhesProduto(produto)}>
-              <img src={produto.imagem} alt={produto.nome} className={styles.image} />
+              {/* Substituído <img> por <Image> e adicionado width/height/alt */}
+              <Image
+                src={produto.imagem}
+                alt={produto.nome}
+                className={styles.image}
+                width={200} 
+                height={150} 
+                 
+              />
               <div className={styles.cardContent}>
                 <h3>{produto.nome}</h3>
                 <p>Quantidade: {produto.quantidade}</p>
@@ -127,7 +137,7 @@ export default function Produtos() {
       )}
 
       {showCadastro && (
-        <CadastroModal onCadastrar={cadastrarProduto} onClose={() => setShowCadastro(false)} />
+        <CadastroModal onCadastrarAction={cadastrarProduto} onCloseAction={() => setShowCadastro(false)} />
       )}
     </div>
   )

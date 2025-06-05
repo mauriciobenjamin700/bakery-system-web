@@ -186,11 +186,13 @@
 }
 
 .iconOverlay:hover {
-  img {
-    filter: brightness(0) invert(1); /* Deixa o ícone branco ao hover */
-  }
+  
   transform: scale(1.2);
   background: #000000;  /* Cor de fundo mais clara e suave com transparência */
+}
+
+.iconOverlay:hover .icomOverlayImage {
+    filter: brightness(0) invert(1);
 }
 
 .remover img {

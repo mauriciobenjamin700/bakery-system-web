@@ -1,9 +1,10 @@
 'use client';
 
+import Image from 'next/image'; // Importar o componente Image do Next.js
 import style from './page.module.css';
 import Header from '../../components/cabecalho/Header';
 import { useEffect, useRef, useState } from 'react';
-import { initChart, initBarChart, initLineChart, populateUl,chartData } from './main';
+import { initChart, initBarChart, initLineChart, populateUl, chartData } from './main';
 import 'chart.js/auto';
 
 export default function Relatorios() {
@@ -20,14 +21,16 @@ export default function Relatorios() {
     };
 
     type MenuOption = 'Mensal' | 'Semanal' | 'Anual';
-    const handleOptionClick = (option:MenuOption) => {
+    const handleOptionClick = (option: MenuOption) => {
         setSelectedOption(option);
         setIsMenuOpen(false);
-        // Aqui  adiciona a lógica para filtrar os relatórios com base na opção selecionada
+        // Aqui você pode adicionar a lógica para filtrar os relatórios com base na opção selecionada
+        // Por exemplo, chamar uma função que recarrega os dados dos gráficos com base em 'option'
     };
 
 
     useEffect(() => {
+        // Verifica se os elementos canvas e ul existem antes de inicializar os gráficos e popular a lista
         if (chartRef.current) {
             initChart(chartRef.current);
         }
@@ -41,92 +44,97 @@ export default function Relatorios() {
             populateUl(detailsUlRef.current, chartData);
         }
 
-    }, []);
+    }, []); // O array vazio de dependências garante que este efeito seja executado apenas uma vez, após a montagem inicial
 
     return (
         <div>
             <Header />
-        <div className={style.relatoriospage}>
-            
-            <main className={style.conteiner}>
-                <div className={style.title}>
-                    <h1 className={style.pageTitleP}> Relatório </h1>
-                    <button className={style.buttonFilter} onClick={toggleMenu}>
-                        {selectedOption}
-                        <img className={style.iconButtom}
-                            src="https://img.icons8.com/ios-glyphs/30/expand-arrow--v1.png"
-                            alt="expand-arrow--v1" />
-                    </button>
-                    {isMenuOpen && (
-                        <div className={style.dropdownMenu}>
-                            <ul className={style.menu}>
-                                <li onClick={() => handleOptionClick('Mensal')}><button>Mensal</button></li>
-                                <li onClick={() => handleOptionClick('Semanal')}><button>Semanal</button></li>
-                                <li onClick={() => handleOptionClick('Anual')}><button>Anual</button></li>
-                            </ul>
-                        </div>
-                    )}
-                </div>
+            <div className={style.relatoriospage}>
 
-                <div className={style.relatoriosContainer}>
-
-                    <div className={style.teste}>
-                        <div className={style.miniCards}> {/*aqui são so minicards */}
-                            <div className={style.mini1}><h3>Total no Caixa</h3> </div>
-                            <div className={style.mini}> <h3>Entrada no caixa</h3> </div>
-                            <div className={style.mini1}> <h3>Retirada do caixa</h3></div>
-                            <div className={style.mini}>  <h3>Active users</h3></div>
-                        </div>
-                        <div > {/* grafico de linhas*/}
-                            <div className={style.cardLine}>
-                                <div> <h3 className={style.pageTitle}>Produtos mais Vendidos</h3></div>
-                                <div>
-                                    <canvas className={style.lineChart} ref={chartRef4} id='linechart'></canvas>
-                                </div>
+                <main className={style.conteiner}>
+                    <div className={style.title}>
+                        <h1 className={style.pageTitleP}> Relatório </h1>
+                        <button className={style.buttonFilter} onClick={toggleMenu}>
+                            {selectedOption}
+                            {/* Substituindo <img> por <Image> para otimização do Next.js */}
+                            <Image
+                                className={style.iconButtom}
+                                src="https://img.icons8.com/ios-glyphs/30/expand-arrow--v1.png"
+                                alt="Seta para expandir/recolher menu" // Alt text mais descritivo
+                                width={30} // Largura do ícone
+                                height={30} // Altura do ícone
+                            />
+                        </button>
+                        {isMenuOpen && (
+                            <div className={style.dropdownMenu}>
+                                <ul className={style.menu}>
+                                    <li onClick={() => handleOptionClick('Mensal')}><button>Mensal</button></li>
+                                    <li onClick={() => handleOptionClick('Semanal')}><button>Semanal</button></li>
+                                    <li onClick={() => handleOptionClick('Anual')}><button>Anual</button></li>
+                                </ul>
                             </div>
-                        </div>
+                        )}
                     </div>
 
-                    <div className={style.chartsContainer}>
+                    <div className={style.relatoriosContainer}>
 
-                        <div className={style.bar}> {/*Grafico de barras */}
-                            <div>
-                                <div className={style.card}>
+                        <div className={style.teste}>
+                            <div className={style.miniCards}> {/*aqui são so minicards */}
+                                <div className={style.mini1}><h3>Total no Caixa</h3> </div>
+                                <div className={style.mini}> <h3>Entrada no caixa</h3> </div>
+                                <div className={style.mini1}> <h3>Retirada do caixa</h3></div>
+                                <div className={style.mini}>  <h3>Active users</h3></div>
+                            </div>
+                            <div > {/* grafico de linhas*/}
+                                <div className={style.cardLine}>
                                     <div> <h3 className={style.pageTitle}>Produtos mais Vendidos</h3></div>
-                                    <div className={style.chartConteiner}>
-                                        <canvas className={style.barChart} ref={chartRef2} id='Barchart'></canvas>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div> {/*aqui acaba o grafico de barras*/}
-
-                        <div className={style.donut}>
-                            <div> {/*grafico donut*/}
-                                <div className={style.card}> {/*equivalente ao programming states*/}
                                     <div>
-                                        <h3 className={style.pageTitle}>Produtos mais vendidos</h3>
-                                    </div>
-                                    <div className={style.chartConteiner}>
-                                        <canvas className={style.myChart} ref={chartRef} id="myChart"></canvas>
-                                    </div>
-
-                                    <div className={style.details}>
-                                        <ul ref={detailsUlRef}>
-
-                                        </ul>
+                                        <canvas className={style.lineChart} ref={chartRef4} id='linechart'></canvas>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div className={style.chartsContainer}>
+
+                            <div className={style.bar}> {/*Grafico de barras */}
+                                <div>
+                                    <div className={style.card}>
+                                        <div> <h3 className={style.pageTitle}>Produtos mais Vendidos</h3></div>
+                                        <div className={style.chartConteiner}>
+                                            <canvas className={style.barChart} ref={chartRef2} id='Barchart'></canvas>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div> {/*aqui acaba o grafico de barras*/}
+
+                            <div className={style.donut}>
+                                <div> {/*grafico donut*/}
+                                    <div className={style.card}> {/*equivalente ao programming states*/}
+                                        <div>
+                                            <h3 className={style.pageTitle}>Produtos mais vendidos</h3>
+                                        </div>
+                                        <div className={style.chartConteiner}>
+                                            <canvas className={style.myChart} ref={chartRef} id="myChart"></canvas>
+                                        </div>
+
+                                        <div className={style.details}>
+                                            <ul ref={detailsUlRef}>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
-                </div>
 
-
-            </main>
-        </div>
+                </main>
+            </div>
         </div>
     );
 }
