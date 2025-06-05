@@ -145,7 +145,12 @@ export default function Ingredientes() {
                   </button>
                 </div>
 
-                
+                <div className={styles.cardContent}>
+                  <h3>{ing.name}</h3>
+                  <p>Marca: {ing.mark ?? '---'}</p>
+                  <p>Qtd: {ing.quantity}g | Min: {ing.min_quantity ?? '---'}g</p>
+                  <p>Valor: R$ {ing.value.toFixed(2)}</p>
+                </div>
 
                 <div className={styles.cardFooter}>
                   <button
